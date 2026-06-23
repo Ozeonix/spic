@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo "Installing dependencies..."
+      - npm ci
+      - echo "Running linting..."
+      - npm run lint
+      - echo "Running type checks..."
+      - npm run type-check
+      - echo "Running tests..."
+      - npm run test
+
+  build:
+    commands:
+      - echo "Building application..."
+      - npm run build:prod
+      - echo "Build completed successfully"
+
+  post_build:
+    commands:
+      - echo "Build process completed"
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist
+  name: BuildArtifact
